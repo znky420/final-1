@@ -1,0 +1,31 @@
+kind = "web"
+previewPath = "/"
+title = "Robux Gift Panel"
+version = "1.0.0"
+id = "artifacts/robux-gift"
+router = "path"
+
+[[integratedSkills]]
+name = "react-vite"
+version = "1.0.0"
+
+[[services]]
+name = "web"
+paths = [ "/" ]
+localPort = 22998
+
+[services.development]
+run = "pnpm --filter @workspace/robux-gift run dev"
+
+[services.production]
+build = [ "pnpm", "--filter", "@workspace/robux-gift", "run", "build" ]
+publicDir = "artifacts/robux-gift/dist/public"
+serve = "static"
+
+[[services.production.rewrites]]
+from = "/*"
+to = "/index.html"
+
+[services.env]
+PORT = "22998"
+BASE_PATH = "/"
